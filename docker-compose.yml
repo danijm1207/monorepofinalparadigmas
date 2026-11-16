@@ -1,0 +1,124 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: investigacion_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: investigacion
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-postgres_dev_password_change_me}
+    ports:
+      - "55432:5432"
+    volumes:
+      - ./shared/db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./shared/db/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d investigacion"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  backend-java:
+    profiles:
+      - java
+    build:
+      context: ./backends/java
+      dockerfile: Dockerfile
+    container_name: investigacion_backend_java
+    cpus: 2
+    mem_limit: 2g
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+    ports:
+      - "8081:8080"
+    environment:
+      PORT: 8080
+      DATABASE_URL: jdbc:postgresql://postgres:5432/investigacion
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-postgres_dev_password_change_me}
+      DB_POOL_SIZE: 10
+      JWT_SECRET: ${JWT_SECRET:-super_secret_jwt_key_for_development_purposes_only_at_least_256_bits_long}
+      JWT_EXPIRES_IN_HOURS: 24
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:8081,http://localhost:8082,http://localhost:8083}
+      UPLOAD_DIR: /data/uploads
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL_JAVA:-http://localhost:8081}
+    volumes:
+      - uploads_data:/data/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  backend-scala:
+    profiles:
+      - scala
+    build:
+      context: ./backends/scala
+      dockerfile: Dockerfile
+    container_name: investigacion_backend_scala
+    cpus: 2
+    mem_limit: 2g
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+    ports:
+      - "8082:8080"
+    environment:
+      PORT: 8080
+      DATABASE_URL: jdbc:postgresql://postgres:5432/investigacion
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-postgres_dev_password_change_me}
+      DB_POOL_SIZE: 10
+      JWT_SECRET: ${JWT_SECRET:-super_secret_jwt_key_for_development_purposes_only_at_least_256_bits_long}
+      JWT_EXPIRES_IN_HOURS: 24
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:8081,http://localhost:8082,http://localhost:8083}
+      UPLOAD_DIR: /data/uploads
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL_SCALA:-http://localhost:8082}
+    volumes:
+      - uploads_data:/data/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  backend-kotlin:
+    profiles:
+      - kotlin
+    build:
+      context: ./backends/kotlin
+      dockerfile: Dockerfile
+    container_name: investigacion_backend_kotlin
+    cpus: 2
+    mem_limit: 2g
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2048M
+    ports:
+      - "8083:8080"
+    environment:
+      PORT: 8080
+      DATABASE_URL: jdbc:postgresql://postgres:5432/investigacion
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD:-postgres_dev_password_change_me}
+      DB_POOL_SIZE: 10
+      JWT_SECRET: ${JWT_SECRET:-super_secret_jwt_key_for_development_purposes_only_at_least_256_bits_long}
+      JWT_EXPIRES_IN_HOURS: 24
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:3000,http://localhost:8081,http://localhost:8082,http://localhost:8083}
+      UPLOAD_DIR: /data/uploads
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL_KOTLIN:-http://localhost:8083}
+    volumes:
+      - uploads_data:/data/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  uploads_data:
