@@ -1,0 +1,66 @@
+# Secretos y variables locales
+.env
+.env.local
+*.env
+
+# Python / Pytest / Virtualenv
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+
+# Java / Kotlin (Gradle)
+.gradle/
+build/
+!backends/*/src/**/build
+out/
+gradle/wrapper/gradle-wrapper.jar
+
+# Scala (sbt)
+target/
+project/target/
+project/project/
+.bloop/
+.metals/
+
+# Archivos de IDE y Editores
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Docker / Volúmenes locales y uploads
+/data/uploads/*
+!/data/uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
+
+# Resultados locales temporales (pero preservamos carpetas con .gitkeep)
+results/raw/*
+!results/raw/.gitkeep
+results/consolidated/*
+!results/consolidated/.gitkeep
+results/charts/*
+!results/charts/.gitkeep
+
+# Logs y OS
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
