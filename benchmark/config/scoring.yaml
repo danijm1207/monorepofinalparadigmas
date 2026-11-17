@@ -1,0 +1,73 @@
+# ==============================================================================
+# Configuración de Puntuación y Pesos de la Rúbrica de Evaluación
+# ==============================================================================
+rubric_weights:
+  execution_time: 0.25
+  memory_consumption: 0.20
+  throughput: 0.20
+  code_quality: 0.15
+  reliability: 0.10
+  functional_usage: 0.10
+
+# Subcriterios para Tiempo de Ejecución (Suma = 1.0)
+execution_time_subweights:
+  benchmark_wall_time: 0.60    # Mediana del tiempo de pared por escenario
+  startup_time: 0.20           # Tiempo desde compose up hasta /api/health OK
+  http_p95_latency: 0.20       # Latencia p95 con concurrencia 10
+
+# Subcriterios para Consumo de Memoria (Suma = 1.0)
+memory_consumption_subweights:
+  peak_memory: 0.70            # Pico de memoria del contenedor durante medición
+  idle_memory: 0.30            # Memoria en reposo antes de peticiones
+
+# Subcriterios para Rendimiento / Throughput (Suma = 1.0)
+throughput_subweights:
+  pipeline_records_per_sec: 0.60  # processedRecords / pipelineSeconds
+  http_rps_c50: 0.40              # Solicitudes por segundo en concurrencia 50
+
+# Subcriterios para Calidad de Código (Suma = 1.0)
+code_quality_subweights:
+  q1_line_coverage: 0.20       # Cobertura de líneas / 80, tope 1.0
+  q2_tests_pass_rate: 0.15     # (Pasadas/Total) * min(Total/30, 1.0)
+  q3_strict_compilation: 0.15  # 1.0 si build sin advertencias con banderas estrictas, 0.0 si no
+  q4_cyclomatic_complexity: 0.15 # <= 2.5 da 1.0, >= 6.0 da 0.0, lineal
+  q5_function_length: 0.10     # 0% funciones > 30 líneas da 1.0, >= 20% da 0.0, lineal
+  q6_code_duplication: 0.10    # 0% duplicación da 1.0, >= 10% da 0.0, lineal
+  q7_conciseness: 0.15         # NLOC mínimo / NLOC del lenguaje
+
+# Subcriterios para Confiabilidad (Suma = 1.0)
+reliability_subweights:
+  contract_tests_pass_rate: 0.40 # Pruebas de contrato aprobadas / total
+  checksum_accuracy: 0.30        # Fracción de checksums correctos (escenarios + overview)
+  http_error_rate_inverse: 0.20  # 1 - (errores inesperados / total requests)
+  stability: 0.10                # 1.0 si no hubo caídas, OOM ni reinicios; 0.0 si hubo fallo
+
+# Subcriterios para Uso Funcional (Suma = 1.0)
+functional_usage_subweights:
+  f1_no_explicit_loops: 0.25   # 0 bucles = 1.0, -0.2 por bucle for/while (en Scala solo while)
+  f2_immutable_state: 0.25     # 0 mutables = 1.0, -0.2 por variable var / colección mutable
+  f3_operations_coverage: 0.20 # Cobertura de las 6 operaciones requeridas / 6.0
+  f4_lambda_density: 0.10      # Lambdas por 100 NLOC >= 10 da 1.0, lineal desde 0
+  f5_null_safety: 0.10         # 0 null literales o !! = 1.0, -0.2 por ocurrencia
+  f6_imports_purity: 0.10      # 1.0 si 0 imports prohibidos (IO, SQL, Web, Logging), 0.0 si hay
+
+# Reglas de Desempate y Sensibilidad
+tie_break_threshold: 0.5       # Si diferencia < 0.5 puntos, desempata confiabilidad y luego tiempo
+scenarios:
+  quick: ["T", "S"]
+  full: ["S", "M", "L", "XL"]
+default_seed: 42
+measured_repetitions:
+  T: 5
+  S: 10
+  M: 7
+  L: 5
+  XL: 3
+quick_repetitions:
+  T: 2
+  S: 3
+concurrency_levels: [1, 10, 50]
+concurrency_warmup_seconds: 10
+concurrency_measure_seconds: 30
+quick_concurrency_warmup_seconds: 2
+quick_concurrency_measure_seconds: 5

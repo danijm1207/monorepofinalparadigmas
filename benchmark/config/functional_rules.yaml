@@ -1,0 +1,111 @@
+# ==============================================================================
+# Reglas y Patrones de Análisis Funcional por Lenguaje (F1 a F6)
+# ==============================================================================
+# Solo se analizan los archivos de producción:
+#   analytics/AnalyticsPipeline.*
+#   analytics/ReportFormatter.*
+
+prohibited_imports:
+  - "java.sql"
+  - "java.io"
+  - "java.nio"
+  - "java.net"
+  - "javax."
+  - "jakarta."
+  - "io.javalin"
+  - "org.slf4j"
+  - "com.zaxxer"
+  - "com.fasterxml"
+
+required_operations:
+  - name: "filter"
+    patterns:
+      java: ["\\.filter\\("]
+      kotlin: ["\\.filter\\(", "\\.filterNot\\("]
+      scala: ["\\.filter\\(", "\\.filterNot\\("]
+  - name: "map"
+    patterns:
+      java: ["\\.map\\(", "\\.mapToInt\\(", "\\.mapToLong\\("]
+      kotlin: ["\\.map\\(", "\\.mapNotNull\\("]
+      scala: ["\\.map\\("]
+  - name: "group"
+    patterns:
+      java: ["groupingBy\\("]
+      kotlin: ["\\.groupBy\\("]
+      scala: ["\\.groupBy\\("]
+  - name: "reduce_fold_sum"
+    patterns:
+      java: ["\\.reduce\\(", "\\.sum\\(", "Collectors\\.summingLong\\(", "Collectors\\.summingInt\\("]
+      kotlin: ["\\.reduce\\(", "\\.fold\\(", "\\.sum\\(", "\\.sumOf\\("]
+      scala: ["\\.reduce\\(", "\\.fold\\(", "\\.foldLeft\\(", "\\.sum\\b"]
+  - name: "flatMap"
+    patterns:
+      java: ["\\.flatMap\\("]
+      kotlin: ["\\.flatMap\\("]
+      scala: ["\\.flatMap\\("]
+  - name: "sort"
+    patterns:
+      java: ["\\.sorted\\("]
+      kotlin: ["\\.sorted\\(", "\\.sortedBy\\(", "\\.sortedWith\\("]
+      scala: ["\\.sorted\\b", "\\.sortBy\\(", "\\.sortWith\\("]
+
+language_patterns:
+  java:
+    loops:
+      - "\\bfor\\s*\\("
+      - "\\bwhile\\s*\\("
+      - "\\bdo\\s*\\{"
+    mutables:
+      - "\\bArrayList<"
+      - "\\bHashMap<"
+      - "\\bHashSet<"
+      - "\\bLinkedList<"
+      - "\\bTreeMap<"
+      - "\\bTreeSet<"
+      - "\\bAtomic"
+      - "\\bStringBuilder\\b"
+      - "\\bStringBuffer\\b"
+    null_safety:
+      - "\\bnull\\b"
+    lambda_indicators:
+      - "->"
+      - "::"
+
+  kotlin:
+    loops:
+      - "\\bfor\\s*\\("
+      - "\\bwhile\\s*\\("
+      - "\\bdo\\s*\\{"
+    mutables:
+      - "\\bvar\\b"
+      - "\\bmutableListOf\\("
+      - "\\bmutableMapOf\\("
+      - "\\bmutableSetOf\\("
+      - "\\bMutableList<"
+      - "\\bMutableMap<"
+      - "\\bMutableSet<"
+      - "\\bStringBuilder\\b"
+    null_safety:
+      - "\\bnull\\b"
+      - "!!"
+    lambda_indicators:
+      - "->"
+      - "\\{\\s*it\\b"
+      - "::"
+
+  scala:
+    loops:
+      - "\\bwhile\\s*\\("
+      - "\\bdo\\s*\\{"
+    mutables:
+      - "\\bvar\\b"
+      - "scala\\.collection\\.mutable"
+      - "collection\\.mutable"
+      - "mutable\\."
+      - "\\bStringBuilder\\b"
+    null_safety:
+      - "\\bnull\\b"
+    lambda_indicators:
+      - "=>"
+      - "_\\."
+      - "\\(_\\b"
