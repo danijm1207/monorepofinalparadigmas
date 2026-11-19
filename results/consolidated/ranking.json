@@ -1,0 +1,203 @@
+{
+  "winner": "scala",
+  "ranking": [
+    {
+      "lang": "scala",
+      "total_score": 91.86,
+      "criteria": {
+        "execution_time": 0.9893697338252606,
+        "memory_consumption": 1.0,
+        "throughput": 0.869032137312077,
+        "code_quality": 0.65,
+        "reliability": 0.9999999999999999,
+        "functional_usage": 0.9999999999999999
+      },
+      "reliability_score": 0.9999999999999999,
+      "execution_time_score": 0.9893697338252606,
+      "rank": 1
+    },
+    {
+      "lang": "java",
+      "total_score": 89.54,
+      "criteria": {
+        "execution_time": 0.9505504459581393,
+        "memory_consumption": 1.0,
+        "throughput": 0.9278310258605335,
+        "code_quality": 0.48160182860144035,
+        "reliability": 0.9999999999999999,
+        "functional_usage": 0.9999999999999999
+      },
+      "reliability_score": 0.9999999999999999,
+      "execution_time_score": 0.9505504459581393,
+      "rank": 2
+    },
+    {
+      "lang": "kotlin",
+      "total_score": 89.49,
+      "criteria": {
+        "execution_time": 0.9555144017895911,
+        "memory_consumption": 1.0,
+        "throughput": 0.897162286409808,
+        "code_quality": 0.5995848766755313,
+        "reliability": 0.9999999999999999,
+        "functional_usage": 0.8666666666666666
+      },
+      "reliability_score": 0.9999999999999999,
+      "execution_time_score": 0.9555144017895911,
+      "rank": 3
+    }
+  ],
+  "sensitivity": {
+    "official_winner": "scala",
+    "winner_changed": false,
+    "scenarios": {
+      "official": [
+        {
+          "lang": "scala",
+          "total_score": 91.86,
+          "criteria": {
+            "execution_time": 0.9893697338252606,
+            "memory_consumption": 1.0,
+            "throughput": 0.869032137312077,
+            "code_quality": 0.65,
+            "reliability": 0.9999999999999999,
+            "functional_usage": 0.9999999999999999
+          },
+          "reliability_score": 0.9999999999999999,
+          "execution_time_score": 0.9893697338252606,
+          "rank": 1
+        },
+        {
+          "lang": "java",
+          "total_score": 89.54,
+          "criteria": {
+            "execution_time": 0.9505504459581393,
+            "memory_consumption": 1.0,
+            "throughput": 0.9278310258605335,
+            "code_quality": 0.48160182860144035,
+            "reliability": 0.9999999999999999,
+            "functional_usage": 0.9999999999999999
+          },
+          "reliability_score": 0.9999999999999999,
+          "execution_time_score": 0.9505504459581393,
+          "rank": 2
+        },
+        {
+          "lang": "kotlin",
+          "total_score": 89.49,
+          "criteria": {
+            "execution_time": 0.9555144017895911,
+            "memory_consumption": 1.0,
+            "throughput": 0.897162286409808,
+            "code_quality": 0.5995848766755313,
+            "reliability": 0.9999999999999999,
+            "functional_usage": 0.8666666666666666
+          },
+          "reliability_score": 0.9999999999999999,
+          "execution_time_score": 0.9555144017895911,
+          "rank": 3
+        }
+      ],
+      "equal_weights": {
+        "winner": "scala",
+        "ranking": [
+          {
+            "lang": "scala",
+            "total_score": 91.81,
+            "criteria": {
+              "execution_time": 0.9893697338252606,
+              "memory_consumption": 1.0,
+              "throughput": 0.869032137312077,
+              "code_quality": 0.65,
+              "reliability": 0.9999999999999999,
+              "functional_usage": 0.9999999999999999
+            },
+            "reliability_score": 0.9999999999999999,
+            "execution_time_score": 0.9893697338252606,
+            "rank": 1
+          },
+          {
+            "lang": "java",
+            "total_score": 89.33,
+            "criteria": {
+              "execution_time": 0.9505504459581393,
+              "memory_consumption": 1.0,
+              "throughput": 0.9278310258605335,
+              "code_quality": 0.48160182860144035,
+              "reliability": 0.9999999999999999,
+              "functional_usage": 0.9999999999999999
+            },
+            "reliability_score": 0.9999999999999999,
+            "execution_time_score": 0.9505504459581393,
+            "rank": 2
+          },
+          {
+            "lang": "kotlin",
+            "total_score": 88.65,
+            "criteria": {
+              "execution_time": 0.9555144017895911,
+              "memory_consumption": 1.0,
+              "throughput": 0.897162286409808,
+              "code_quality": 0.5995848766755313,
+              "reliability": 0.9999999999999999,
+              "functional_usage": 0.8666666666666666
+            },
+            "reliability_score": 0.9999999999999999,
+            "execution_time_score": 0.9555144017895911,
+            "rank": 3
+          }
+        ]
+      },
+      "double_perf_and_time": {
+        "winner": "scala",
+        "ranking": [
+          {
+            "lang": "scala",
+            "total_score": 92.09,
+            "criteria": {
+              "execution_time": 0.9893697338252606,
+              "throughput": 0.869032137312077,
+              "memory_consumption": 1.0,
+              "code_quality": 0.65,
+              "reliability": 0.9999999999999999,
+              "functional_usage": 0.9999999999999999
+            },
+            "reliability_score": 0.9999999999999999,
+            "execution_time_score": 0.9893697338252606,
+            "rank": 1
+          },
+          {
+            "lang": "java",
+            "total_score": 90.48,
+            "criteria": {
+              "execution_time": 0.9505504459581393,
+              "throughput": 0.9278310258605335,
+              "memory_consumption": 1.0,
+              "code_quality": 0.48160182860144035,
+              "reliability": 0.9999999999999999,
+              "functional_usage": 0.9999999999999999
+            },
+            "reliability_score": 0.9999999999999999,
+            "execution_time_score": 0.9505504459581393,
+            "rank": 2
+          },
+          {
+            "lang": "kotlin",
+            "total_score": 89.65,
+            "criteria": {
+              "execution_time": 0.9555144017895911,
+              "throughput": 0.897162286409808,
+              "memory_consumption": 1.0,
+              "code_quality": 0.5995848766755313,
+              "reliability": 0.9999999999999999,
+              "functional_usage": 0.8666666666666666
+            },
+            "reliability_score": 0.9999999999999999,
+            "execution_time_score": 0.9555144017895911,
+            "rank": 3
+          }
+        ]
+      }
+    }
+  }
+}

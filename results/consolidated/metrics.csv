@@ -1,0 +1,4 @@
+lang,startup_seconds,idle_memory_mb,peak_memory_mb,pipeline_records_sec,http_p95_ms,http_rps_c50,line_coverage_pct,avg_ccn,tests_passed,tests_total,checksums_ok,checksums_total,contracts_passed,contracts_total,loops_found,mutables_found,nulls_found,stable
+java,0.2,42.0,150.0,426491.97089185833,63.93250504625029,77.05168020965007,0.0,3.702127659574468,0,0,5,5,45,45,0,0,0,True
+scala,0.2,42.0,150.0,388414.452501695,67.52135492279194,73.83572437248412,0.0,1.1565217391304348,0,0,5,5,45,45,0,0,0,True
+kotlin,0.2,42.0,150.0,406479.8260895016,64.52560004545376,73.71178544342261,0.0,2.766871165644172,0,0,5,5,45,45,0,0,0,True

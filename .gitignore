@@ -51,13 +51,9 @@ project/project/
 uploads/*
 !uploads/.gitkeep
 
-# Resultados locales temporales (pero preservamos carpetas con .gitkeep)
+# Resultados crudos locales (muy pesados, se preserva carpeta con .gitkeep)
 results/raw/*
 !results/raw/.gitkeep
-results/consolidated/*
-!results/consolidated/.gitkeep
-results/charts/*
-!results/charts/.gitkeep
 
 # Logs y OS
 *.log
